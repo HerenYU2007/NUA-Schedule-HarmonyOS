@@ -1,1 +1,1 @@
-{"draft":false,"prerelease":true,"tag_name":"v1.2.2","body":"鸿蒙版功能移植测试：课程编辑、日程、提醒与导出；双课程卡片及圆角修复。公开 HAP 未签名，需要自行配置合法签名后安装。","html_url":"https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases/tag/v1.2.2"}
+{"draft":false,"prerelease":false,"tag_name":"v1.2.3","body":"调整下午第5—7节的上课时间；设置中新增全局节次时间，课程、提醒和卡片统一使用。自定义时间的课程不变。","html_url":"https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases/tag/v1.2.3"}
