@@ -4,7 +4,7 @@
 
 当前鸿蒙版本仍为 **1.2.2 / 1002002**；Bundle 为 `cn.nua.wenguan.schedule`，最低 HarmonyOS 6.0 / API20。
 
-[源码与测试安装包](https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases/tag/v1.2.2)。带 `debug-signed` 的 HAP 仅供已授权调试设备使用；未签名 HAP 需要自行签名，均不是正式商店发布包。
+[源码与未签名测试包](https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases/tag/v1.2.2)。公开附件仅提供源码和未签名 HAP，需要自行配置合法签名后安装；不公开含授权设备标识的调试签名包，也不包含正式商店发布包。
 
 ## 功能
 
