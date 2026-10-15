@@ -1,0 +1,25 @@
+# Local signing configuration is machine-specific and contains secrets.
+/build-profile.json5
+build/
+.hvigor/
+oh_modules/
+node_modules/
+.idea/
+local.properties
+*.p12
+*.p7b
+*.cer
+*.keystore
+*.jks
+*.pem
+*.key
+*.log
+*.hap
+*.app
+*.xls
+*.xlsx
+signing/
+.test-output/
+*.class
+agconnect-services.json
+data.lock
