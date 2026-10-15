@@ -2,11 +2,13 @@ import { common } from '@kit.AbilityKit';
 import { preferences } from '@kit.ArkData';
 import { Snapshot, validSnapshot } from '../model/Schedule';
 import { readJson, writeJson } from './AtomicStore';
+import { loadClock } from './ClockStore';
 function prefs(context: common.Context): preferences.Preferences {
   preferences.removePreferencesFromCacheSync(context, 'nua_schedule');
   return preferences.getPreferencesSync(context, { name: 'nua_schedule' });
 }
 export function load(context: common.Context): Snapshot {
+  loadClock(context);
   return validSnapshot(JSON.parse(readJson(context, 'schedule.json', '{"schema":1,"startDate":"2026-09-07","rules":[],"syncedAt":0}')) as Snapshot);
 }
 export function save(context: common.Context, value: Snapshot): void {

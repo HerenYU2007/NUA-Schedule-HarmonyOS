@@ -1,5 +1,6 @@
 import { normalizeClock } from './SchoolClock';
 export interface Rule {
+  clockBound?: boolean;
   id?: string;
   color?: number;
   credits?: string;
@@ -97,6 +98,7 @@ export function validSnapshot(value: Snapshot): Snapshot {
       || typeof r.periods !== 'string' || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(r.start)
       || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(r.end) || r.start >= r.end) throw new Error('课程字段不完整');
     normalizeClock(r);
+    if (r.clockBound !== undefined && typeof r.clockBound !== 'boolean') throw new Error('节次绑定无效');
     if (r.id === undefined) r.id = stableId(r, index);
     if (typeof r.id !== 'string' || !/^[A-Za-z0-9._-]{1,100}$/.test(r.id) || ids.has(r.id)) throw new Error('课程编号无效或重复');
     ids.add(r.id);
@@ -110,4 +112,4 @@ export function stableId(rule: Rule, index: number): string {
   let hash = 2166136261; for (let i = 0; i < value.length; i++) hash = Math.imul(hash ^ value.charCodeAt(i), 16777619);
   return 'legacy-' + (hash >>> 0).toString(16) + '-' + index;
 }
-export function copyRule(rule: Rule): Rule { return { id: rule.id, color: rule.color ?? 0, credits: rule.credits ?? '', note: rule.note ?? '', from: rule.from, to: rule.to, day: rule.day, start: rule.start, end: rule.end, periods: rule.periods, course: rule.course, room: rule.room, teacher: rule.teacher, type: rule.type }; }
+export function copyRule(rule: Rule): Rule { return { clockBound: rule.clockBound, id: rule.id, color: rule.color ?? 0, credits: rule.credits ?? '', note: rule.note ?? '', from: rule.from, to: rule.to, day: rule.day, start: rule.start, end: rule.end, periods: rule.periods, course: rule.course, room: rule.room, teacher: rule.teacher, type: rule.type }; }

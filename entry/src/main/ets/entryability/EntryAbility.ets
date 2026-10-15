@@ -2,8 +2,9 @@ import { UIAbility, Configuration, ConfigurationConstant, Want } from '@kit.Abil
 import { window } from '@kit.ArkUI';
 import { refreshAllForms } from '../services/Forms';
 import { loadApp } from '../services/AppStore';
+import { loadClock } from '../services/ClockStore';
 export default class EntryAbility extends UIAbility {
-  onCreate(want: Want): void { this.receive(want); }
+  onCreate(want: Want): void { try { loadClock(this.context); } catch (_) {} this.receive(want); }
   onNewWant(want: Want): void { this.receive(want); }
   private receive(want: Want): void { const day = Number(want.parameters?.cardWeek ?? 0); if (Number.isInteger(day) && day > 0 && day < 100000) AppStorage.setOrCreate('cardWeek', day); }
   onWindowStageCreate(stage: window.WindowStage): void {

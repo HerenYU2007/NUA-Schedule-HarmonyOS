@@ -6,6 +6,7 @@ import { loadApp } from '../services/AppStore';
 import { backupText, parseBackup, Restored } from '../model/ExportLogic';
 import { restoreBundle } from '../services/AtomicStore';
 import { generateExport } from '../services/ExportWorker';
+import { currentClock } from '../model/SchoolClock';
 import { refreshAllForms } from '../services/Forms';
 import { scheduleReminders } from '../services/Reminders';
 @Entry
@@ -22,7 +23,7 @@ struct Transfer {
     if (this.busy) return; this.busy = true; this.message = '正在准备文件…';
     try {
       const text = backupText(load(this.context()), loadApp(this.context()));
-      const bytes = await taskpool.execute(new taskpool.Task(generateExport, text, kind)) as ArrayBuffer;
+      const bytes = await taskpool.execute(new taskpool.Task(generateExport, text, kind, JSON.stringify(currentClock()))) as ArrayBuffer;
       const paths = await new picker.DocumentViewPicker(this.context()).save({ newFileNames: ['南艺电子课表-' + new Date().toISOString().slice(0, 10) + '.' + kind], fileSuffixChoices: ['.' + kind] });
       if (!paths.length) { this.message = '已取消导出'; return; }
       const file = fileIo.openSync(paths[0], fileIo.OpenMode.WRITE_ONLY | fileIo.OpenMode.TRUNC);

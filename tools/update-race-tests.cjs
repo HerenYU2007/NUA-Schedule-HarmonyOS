@@ -11,7 +11,7 @@ function scenario(kind){
     '@kit.ArkTS':{url:{URL},util:{TextDecoder:class{decodeToString(bytes){return Buffer.from(bytes).toString('utf8');}}}},
     '@kit.AppGalleryKit':{updateManager:{UpdateAvailableCode:{LATER_VERSION_EXIST:1,LATER_VERSION_NOT_EXIST:0},async checkAppUpdate(){stats.market++;if(kind==='store')return{updateAvailable:1};throw Error('unpublished');},async showUpdateDialog(){}}},
     '@kit.RemoteCommunicationKit':{rcp:{Request:class{constructor(url){this.url=url;}},createSession(){let closed=false;return{cancel(){closed=true;},close(){if(!closed)stats.closed++;closed=true;},async fetch(request){stats.requests++;stats.active++;stats.max=Math.max(stats.max,stats.active);try{let body={...release};let delay=1;
-      if(kind==='newer'&&!newerSent&&!request.url.startsWith('https://api.github.com/')&&!request.url.startsWith('https://raw.githubusercontent.com/')){newerSent=true;body.tag_name='v1.2.3';body.html_url=body.html_url.replace('1.2.2','1.2.3');delay=20;}
+      if(kind==='newer'&&!newerSent&&!request.url.startsWith('https://api.github.com/')&&!request.url.startsWith('https://raw.githubusercontent.com/')){newerSent=true;body.tag_name='v1.2.4';body.html_url=body.html_url.replace('1.2.2','1.2.4');delay=20;}
       if(kind==='spoof'){body.tag_name='v9.0.0';body.html_url='https://evil.test/download';}
       await new Promise(resolve=>setTimeout(resolve,delay));if(closed)throw Error('cancelled');if(kind==='fail')throw Error('offline');const data=Buffer.from(JSON.stringify(body));request.destination(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength));return{statusCode:200,headers:{}};
       }finally{stats.active--;}}};}}}
@@ -20,7 +20,7 @@ function scenario(kind){
   return{updates:load('services/Updates'),stats};
 }
 (async()=>{
-  let x=scenario('newer');const results=await Promise.all([x.updates.checkUpdate({},false),x.updates.checkUpdate({},true)]);assert(results.every(r=>r.available&&r.version==='1.2.3'));assert.equal(x.stats.market,1);assert(x.stats.max<=12);assert(x.stats.closed>0);console.log('PASS newer mirror beats old official data; bounded parallelism, cancel and single flight');
+  let x=scenario('newer');const results=await Promise.all([x.updates.checkUpdate({},false),x.updates.checkUpdate({},true)]);assert(results.every(r=>r.available&&r.version==='1.2.4'));assert.equal(x.stats.market,1);assert(x.stats.max<=12);assert(x.stats.closed>0);console.log('PASS newer mirror beats old official data; bounded parallelism, cancel and single flight');
   x=scenario('old');assert.equal((await x.updates.checkUpdate({},true)).message,'暂无更新');assert(x.stats.requests>75);console.log('PASS no-update waits for all mirror results');
   x=scenario('fail');assert((await x.updates.checkUpdate({},true)).message.includes('无法检查'));console.log('PASS total network failure is not misreported as no update');
   x=scenario('spoof');assert.equal((await x.updates.checkUpdate({},true)).available,false);console.log('PASS arbitrary download page rejected');
