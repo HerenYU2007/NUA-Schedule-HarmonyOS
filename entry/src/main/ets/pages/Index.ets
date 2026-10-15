@@ -251,7 +251,7 @@ struct Index {
     this.actionCard('▤', '课表变更记录', '只有课程内容变化才记录，通知不包含课程详情', '更新预览', this.brand(), false, () => this.changes())
     this.actionCard('⚙', '课表与界面设置', '开学时间、显示模式、主题、卡片与提醒', '个性化', this.dark() ? '#C5ADFF' : '#6B49B9', false, () => this.selectPage(3))
     this.actionCard('↻', this.updating ? '正在检查更新' : '检查软件更新', '打开 App 自动检查，也可点此手动检查', '应用更新', this.dark() ? '#FFD48B' : '#966300', false, () => this.softwareUpdate(true))
-    this.message('南艺电子课表 · 1.2.3 HarmonyOS\n没有会员或广告。只有主动获取课表才打开学校登录；软件更新仅在打开 App 时检查。\n非学校官方应用。')
+    this.message('南艺电子课表 · 1.2.4 HarmonyOS\n没有会员或广告。只有主动获取课表才打开学校登录；软件更新仅在打开 App 时检查。\n非学校官方应用。')
   }
   @Builder private settingsPage() {
     this.actionCard('◷', '全局节次时间', '调整第1—12节，课程、提醒和卡片同步使用', '作息时间', this.brand(), false, () => this.getUIContext().getRouter().pushUrl({ url: 'pages/PeriodTimes' }))

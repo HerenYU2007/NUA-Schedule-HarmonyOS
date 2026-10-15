@@ -2,9 +2,9 @@
 
 原生 ArkTS / ArkUI / ArkWeb / Form Kit 实现，以 Android 教务版 **1.2.4** 的现有功能为迁移基准。非南京艺术学院官方应用；与安卓和鸿蒙个人版分别维护。
 
-当前鸿蒙版本为 **1.2.3 / 1002003**；Bundle 为 `cn.nua.wenguan.schedule`，最低 HarmonyOS 6.0 / API20。
+当前鸿蒙版本为 **1.2.4 / 1002004**；Bundle 为 `cn.nua.wenguan.schedule`，最低 HarmonyOS 6.0 / API20。
 
-[下载与更新说明](https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases/tag/v1.2.3)。正式签名 `.app` 用于华为审核，不等于已上架或可直接安装；未签名 HAP 需要自行配置合法签名。不公开含授权设备标识的调试签名包。
+[下载与更新说明](https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases/tag/v1.2.4)。正式签名 `.app` 压缩包用于华为审核，不等于已上架或可直接安装；未签名 HAP 需要自行配置合法签名。不公开含授权设备标识的调试签名包。
 
 ## 功能
 

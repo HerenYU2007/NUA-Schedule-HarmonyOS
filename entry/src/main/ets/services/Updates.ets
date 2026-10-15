@@ -7,7 +7,7 @@ export interface UpdateResult { available: boolean; version: string; notes: stri
 interface Release { draft: boolean; prerelease: boolean; tag_name: string; body: string; html_url: string; }
 export const RELEASES: string = 'https://github.com/HerenYU2007/NUA-Schedule-HarmonyOS/releases';
 const API: string = 'https://api.github.com/repos/HerenYU2007/NUA-Schedule-HarmonyOS/releases/latest';
-const CURRENT: string = '1.2.3';
+const CURRENT: string = '1.2.4';
 let last: number = 0;
 let flight: Promise<UpdateResult> | undefined = undefined;
 let cached: UpdateResult | undefined = undefined;
